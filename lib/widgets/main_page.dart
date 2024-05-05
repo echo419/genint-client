@@ -40,13 +40,18 @@ class MainPage extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
+                        child: ListView.separated(
                           itemCount:
                               appContentElementView.children?.length ?? 0,
                           itemBuilder: (context, index) {
                             return AppContentElementWidget(
                                 appContentElementView:
                                     appContentElementView.children![index]);
+                          },
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              color: GColors.defaultAmber,
+                            );
                           },
                         ),
                       ),

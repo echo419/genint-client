@@ -11,6 +11,12 @@ class GStyles {
     fontFamily: "Verdana",
   );
 
+  static TextStyle appContentWidgetElementStyle = TextStyle(
+      fontSize: 16.0,
+      color: GColors.defaultBlack,
+      fontFamily: "Verdana",
+      fontWeight: FontWeight.w200);
+
   static TextStyle mainTitleStyle = TextStyle(
     fontSize: 20.0,
     color: GColors.defaultWhite,
