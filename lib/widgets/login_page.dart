@@ -49,36 +49,40 @@ class _LoginPageState extends State<LoginPage> {
       return Scaffold(
           backgroundColor: GColors.defaultWhite,
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: Image(image: AssetImage("assets/genesys_logo.jpg"))),
-                const Divider(),
-                SizedBox(
-                    width: 500,
-                    child: TextField(
-                      controller: _userNameController,
-                      style: GStyles.loginTextFieldStyle,
-                      textAlign: TextAlign.center,
-                      decoration:
-                          GDecorations.loginTextFieldDecoration("Username"),
-                    )),
-                const Divider(),
-                SizedBox(
-                    width: 500,
-                    child: TextField(
-                      controller: _passwordController,
-                      textAlign: TextAlign.center,
-                      obscureText: true,
-                      style: GStyles.loginTextFieldStyle,
-                      decoration:
-                          GDecorations.loginTextFieldDecoration("Password"),
-                    )),
-                const Divider()
-              ],
+            child: Container(
+              constraints: const BoxConstraints(minWidth: 500, maxWidth: 1024),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                      width: 200,
+                      height: 200,
+                      child:
+                          Image(image: AssetImage("assets/genesys_logo.jpg"))),
+                  const SizedBox(width: 500, child: Divider()),
+                  SizedBox(
+                      width: 500,
+                      child: TextField(
+                        controller: _userNameController,
+                        style: GStyles.loginTextFieldStyle,
+                        textAlign: TextAlign.center,
+                        decoration:
+                            GDecorations.loginTextFieldDecoration("Username"),
+                      )),
+                  const SizedBox(width: 500, child: Divider()),
+                  SizedBox(
+                      width: 500,
+                      child: TextField(
+                        controller: _passwordController,
+                        textAlign: TextAlign.center,
+                        obscureText: true,
+                        style: GStyles.loginTextFieldStyle,
+                        decoration:
+                            GDecorations.loginTextFieldDecoration("Password"),
+                      )),
+                  const SizedBox(width: 500, child: Divider()),
+                ],
+              ),
             ),
           ),
           floatingActionButton: FloatingActionButton(

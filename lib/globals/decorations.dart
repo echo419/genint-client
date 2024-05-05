@@ -15,4 +15,16 @@ class GDecorations {
         hintMaxLines: 2,
         hintTextDirection: TextDirection.rtl);
   }
+
+  static Decoration mainContainerDecoration = BoxDecoration(
+      color: Colors.white,
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: const Offset(0, 3),
+        ),
+      ]);
 }

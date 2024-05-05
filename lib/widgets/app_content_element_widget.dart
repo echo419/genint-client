@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:genesys_interview/messages/app_content_element_view.dart';
 import 'package:genesys_interview/widgets/main_page.dart';
 
@@ -25,6 +26,28 @@ class AppContentElementWidget extends StatelessWidget {
     ));
   }
 
+  void widgetTappedAnimation(BuildContext context) {
+    Navigator.of(context).push(
+        PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) {
+      return MainPage(appContentElementView: appContentElementView);
+    }, transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.decelerate;
+
+      final tween = Tween(begin: begin, end: end);
+      final curvedAnimation = CurvedAnimation(
+        parent: animation,
+        curve: curve,
+      );
+
+      return SlideTransition(
+        position: tween.animate(curvedAnimation),
+        child: child,
+      );
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     if (appContentElementView.children == null ||
@@ -34,7 +57,7 @@ class AppContentElementWidget extends StatelessWidget {
 
     return GestureDetector(
         onTap: () {
-          widgetTapped(context);
+          widgetTappedAnimation(context);
         },
         child: baseWidget);
   }

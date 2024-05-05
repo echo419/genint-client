@@ -7,6 +7,7 @@ void main() {
   runApp(ChangeNotifierProvider(
     create: (context) => SharedModel(),
     child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Genesys Interview',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
