@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:genesys_interview/globals/colors.dart';
+import 'package:genesys_interview/globals/decorations.dart';
+import 'package:genesys_interview/globals/misc.dart';
 import 'package:genesys_interview/globals/styles.dart';
 import 'package:genesys_interview/messages/app_content_element_view.dart';
 import 'package:genesys_interview/widgets/main_page.dart';
@@ -18,26 +19,77 @@ class AppContentElementWidget extends StatefulWidget {
 class _AppContentElementWidgetState extends State<AppContentElementWidget> {
   bool _mouseEntered = false;
 
+  RichText get contentRichText {
+    if (widget.appContentElementView.text == null ||
+        widget.appContentElementView.text!.isEmpty) {
+      return RichText(text: const TextSpan(children: []));
+    }
+
+    List<InlineSpan> mainSpanArray = [];
+    String currentPlainText = "";
+
+    for (var element in widget.appContentElementView.text!.split(" ")) {
+      if (isImageLink(element)) {
+        mainSpanArray.add(TextSpan(
+            text: currentPlainText,
+            style: GStyles.appContentWidgetElementStyle));
+        currentPlainText = " ";
+        mainSpanArray.add(WidgetSpan(
+            child: Container(
+          padding: const EdgeInsets.all(2),
+          margin: const EdgeInsets.all(8),
+          decoration: GDecorations.contentImageDecoration,
+          child: Image.network(element),
+        )));
+      } else {
+        currentPlainText += "$element ";
+      }
+    }
+
+    if (currentPlainText.trim().isNotEmpty) {
+      mainSpanArray.add(TextSpan(
+          text: currentPlainText, style: GStyles.appContentWidgetElementStyle));
+    }
+
+    return RichText(
+        text: TextSpan(
+            children: mainSpanArray,
+            style: GStyles.appContentWidgetElementStyle));
+  }
+
+  bool isImageLink(String element) {
+    if (!element.startsWith("http") && !element.startsWith("https")) {
+      return false;
+    }
+
+    // at this point we know it starts with any of the valid prefixes, we can safely exit if we catch any image extension ending
+    for (var extension in GMisc.imageExtensions) {
+      if (element.endsWith(extension)) return true;
+    }
+
+    return false;
+  }
+
   Widget get baseWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        decoration: _mouseEntered
-            ? BoxDecoration(
-                color: GColors.defaultAmberLight,
-                borderRadius: const BorderRadius.all(Radius.circular(20)))
-            : null,
+        decoration:
+            _mouseEntered ? GDecorations.mouseEnteredBoxDecoration : null,
         //color: _mouseEntered ? GColors.defaultAmberLight : null,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(widget.appContentElementView.icon),
+              child: Icon(
+                widget.appContentElementView.icon,
+              ),
             ),
             Expanded(
-                child: Text(
-              widget.appContentElementView.text ?? "",
-              style: GStyles.appContentWidgetElementStyle,
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: contentRichText,
             ))
           ],
         ),
