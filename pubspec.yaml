@@ -37,6 +37,8 @@ dependencies:
   provider:
   url_launcher:
   url_launcher_web:
+  http: ^1.2.1
+  crypto: ^3.0.3
 
 
 dev_dependencies:
