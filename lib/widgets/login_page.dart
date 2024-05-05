@@ -47,6 +47,13 @@ class _LoginPageState extends State<LoginPage> {
 
     String userName = _userNameController.text;
     String password = _passwordController.text;
+
+    if (userName.isEmpty || password.isEmpty) {
+      GLogic.showErrorSnackBar(
+          message: GLabels.missingCredentials, context: context);
+      return;
+    }
+
     String passwordHash = md5.convert(utf8.encode(password)).toString();
 
     http.Response httpResponse = await http.get(Uri.parse(
@@ -59,14 +66,19 @@ class _LoginPageState extends State<LoginPage> {
     if (loginResponse.success == false) {
       if (context.mounted) {
         GLogic.showErrorSnackBar(
-            message: loginResponse.message ?? "Login error", context: context);
+            message: loginResponse.message ?? GLabels.serverError,
+            context: context);
       }
     } else {
-      if (context.mounted) {
+      if (loginResponse.record == null) {
+        GLogic.showErrorSnackBar(
+            message: loginResponse.message ?? GLabels.loginFailed,
+            context: context);
+      } else if (context.mounted) {
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
           builder: (context) {
-            return MainPage(appContentElementView: MockAppContent());
+            return MainPage(appContentElementView: loginResponse.record!);
           },
         ), (_) => false);
       }
