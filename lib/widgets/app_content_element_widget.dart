@@ -12,7 +12,7 @@ class AppContentElementWidget extends StatelessWidget {
     return Row(
       children: [
         Icon(appContentElementView.icon),
-        Text(appContentElementView.text ?? "")
+        Expanded(child: Text(appContentElementView.text ?? ""))
       ],
     );
   }

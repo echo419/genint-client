@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:genesys_interview/globals/colors.dart';
-import 'package:genesys_interview/globals/styles.dart';
 import 'package:genesys_interview/messages/app_content_element_view.dart';
 import 'package:genesys_interview/messages/shared_model.dart';
 import 'package:genesys_interview/widgets/app_content_element_widget.dart';
