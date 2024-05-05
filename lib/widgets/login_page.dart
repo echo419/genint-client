@@ -84,8 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _userNameController,
                         style: GStyles.loginTextFieldStyle,
                         textAlign: TextAlign.center,
-                        decoration:
-                            GDecorations.loginTextFieldDecoration("Username"),
+                        decoration: GDecorations.loginTextFieldDecoration(
+                            GLabels.userName),
                       )),
                   const SizedBox(width: 500, child: Divider()),
                   SizedBox(
@@ -95,8 +95,8 @@ class _LoginPageState extends State<LoginPage> {
                         textAlign: TextAlign.center,
                         obscureText: true,
                         style: GStyles.loginTextFieldStyle,
-                        decoration:
-                            GDecorations.loginTextFieldDecoration("Password"),
+                        decoration: GDecorations.loginTextFieldDecoration(
+                            GLabels.password),
                       )),
                   const SizedBox(width: 500, child: Divider()),
                 ],

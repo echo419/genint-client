@@ -4,6 +4,7 @@ import 'package:genesys_interview/globals/misc.dart';
 import 'package:genesys_interview/globals/styles.dart';
 import 'package:genesys_interview/messages/app_content_element_view.dart';
 import 'package:genesys_interview/widgets/main_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppContentElementWidget extends StatefulWidget {
   final AppContentElementView appContentElementView;
@@ -35,11 +36,19 @@ class _AppContentElementWidgetState extends State<AppContentElementWidget> {
             style: GStyles.appContentWidgetElementStyle));
         currentPlainText = " ";
         mainSpanArray.add(WidgetSpan(
+            child: GestureDetector(
+          onTap: () {
+            launchUrl(Uri.parse(element));
+          },
+          child: MouseRegion(
+            cursor: MaterialStateMouseCursor.clickable,
             child: Container(
-          padding: const EdgeInsets.all(2),
-          margin: const EdgeInsets.all(8),
-          decoration: GDecorations.contentImageDecoration,
-          child: Image.network(element),
+              padding: const EdgeInsets.all(2),
+              margin: const EdgeInsets.all(8),
+              decoration: GDecorations.contentImageDecoration,
+              child: Image.network(element),
+            ),
+          ),
         )));
       } else {
         currentPlainText += "$element ";
