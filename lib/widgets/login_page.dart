@@ -1,11 +1,15 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:genesys_interview/globals/colors.dart';
 import 'package:genesys_interview/globals/decorations.dart';
+import 'package:genesys_interview/globals/labels.dart';
 import 'package:genesys_interview/globals/styles.dart';
 import 'package:genesys_interview/messages/mock_app_content.dart';
 import 'package:genesys_interview/messages/shared_model.dart';
 import 'package:genesys_interview/widgets/main_page.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -36,11 +40,11 @@ class _LoginPageState extends State<LoginPage> {
   loginRequest(SharedModel sharedModel) {
     //sharedModel.appContent = MockAppContent();
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
       builder: (context) {
         return MainPage(appContentElementView: MockAppContent());
       },
-    ));
+    ), (_) => false);
   }
 
   @override
@@ -54,11 +58,25 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                       width: 200,
-                      height: 200,
-                      child:
-                          Image(image: AssetImage("assets/genesys_logo.jpg"))),
+                      child: MouseRegion(
+                        cursor: MaterialStateMouseCursor.clickable,
+                        child: GestureDetector(
+                          onTap: () {
+                            launchUrl(Uri.parse("https://www.genesys.com/"));
+                          },
+                          child: const Image(
+                              image: AssetImage("assets/genesys_logo_02.png")),
+                        ),
+                      )),
+                  Text(
+                    GLabels.subTitle,
+                    style: GStyles.loginSubtitleStyle,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   const SizedBox(width: 500, child: Divider()),
                   SizedBox(
                       width: 500,

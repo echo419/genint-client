@@ -17,6 +17,20 @@ class GStyles {
       fontFamily: "Verdana",
       fontWeight: FontWeight.w200);
 
+  static TextStyle loginSubtitleStyle = TextStyle(
+      fontSize: 16.0,
+      color: GColors.defaultBlack,
+      fontFamily: "Verdana",
+      shadows: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: const Offset(10, 10),
+        )
+      ],
+      fontWeight: FontWeight.w200);
+
   static TextStyle mainTitleStyle = TextStyle(
     fontSize: 20.0,
     color: GColors.defaultWhite,

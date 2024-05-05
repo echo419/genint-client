@@ -22,7 +22,12 @@ class _AppContentElementWidgetState extends State<AppContentElementWidget> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        color: _mouseEntered ? GColors.defaultAmberLight : null,
+        decoration: _mouseEntered
+            ? BoxDecoration(
+                color: GColors.defaultAmberLight,
+                borderRadius: const BorderRadius.all(Radius.circular(20)))
+            : null,
+        //color: _mouseEntered ? GColors.defaultAmberLight : null,
         child: Row(
           children: [
             Padding(

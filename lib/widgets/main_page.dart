@@ -5,12 +5,19 @@ import 'package:genesys_interview/globals/styles.dart';
 import 'package:genesys_interview/messages/app_content_element_view.dart';
 import 'package:genesys_interview/messages/shared_model.dart';
 import 'package:genesys_interview/widgets/app_content_element_widget.dart';
+import 'package:genesys_interview/widgets/login_page.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
   final AppContentElementView appContentElementView;
 
   const MainPage({super.key, required this.appContentElementView});
+
+  void logout(BuildContext context) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+      return const LoginPage();
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,16 @@ class MainPage extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: GColors.defaultWhite,
                 appBar: AppBar(
+                  actions: [
+                    Builder(
+                        builder: (innerContext) => IconButton(
+                            onPressed: () {
+                              logout(context);
+                            },
+                            icon: const Icon(
+                              Icons.logout,
+                            ))),
+                  ],
                   iconTheme: IconThemeData(
                     color: GColors.defaultWhite,
                   ),
