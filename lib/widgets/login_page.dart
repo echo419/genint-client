@@ -55,31 +55,43 @@ class _LoginPageState extends State<LoginPage> {
 
     String passwordHash = md5.convert(utf8.encode(password)).toString();
 
-    http.Response httpResponse = await http.get(Uri.parse(
-        "${GMisc.loginUrl}?userName=$userName&passwordHash=$passwordHash"));
+    try {
+      http.Response httpResponse = await http.get(Uri.parse(
+          "${GMisc.loginUrlProd}?userName=$userName&passwordHash=$passwordHash"));
 
-    Map<String, dynamic> httpResponseMap = jsonDecode(httpResponse.body);
+      Map<String, dynamic> httpResponseMap = jsonDecode(httpResponse.body);
+      LoginResponse loginResponse = LoginResponse.fromMap(httpResponseMap);
 
-    LoginResponse loginResponse = LoginResponse.fromMap(httpResponseMap);
-
-    if (loginResponse.success == false) {
+      if (loginResponse.success == false) {
+        if (context.mounted) {
+          GLogic.showErrorSnackBar(
+              message: loginResponse.message ?? GLabels.serverError,
+              // ignore: use_build_context_synchronously
+              context: context);
+        }
+      } else {
+        if (loginResponse.record == null) {
+          if (context.mounted) {
+            GLogic.showErrorSnackBar(
+                message: loginResponse.message ?? GLabels.loginFailed,
+                // ignore: use_build_context_synchronously
+                context: context);
+          }
+        } else if (context.mounted) {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+            builder: (context) {
+              return MainPage(appContentElementView: loginResponse.record!);
+            },
+          ), (_) => false);
+        }
+      }
+    } catch (ex) {
       if (context.mounted) {
         GLogic.showErrorSnackBar(
-            message: loginResponse.message ?? GLabels.serverError,
+            message: GLabels.serverError,
+            // ignore: use_build_context_synchronously
             context: context);
-      }
-    } else {
-      if (loginResponse.record == null) {
-        GLogic.showErrorSnackBar(
-            message: loginResponse.message ?? GLabels.loginFailed,
-            context: context);
-      } else if (context.mounted) {
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-          builder: (context) {
-            return MainPage(appContentElementView: loginResponse.record!);
-          },
-        ), (_) => false);
       }
     }
 
