@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genesys_interview/globals/colors.dart';
+import 'package:genint/globals/colors.dart';
 
 class GLogic {
   static void showErrorSnackBar(

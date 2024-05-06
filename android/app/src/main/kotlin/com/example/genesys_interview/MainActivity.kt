@@ -1,4 +1,4 @@
-package com.example.genesys_interview
+package com.example.genint
 
 import io.flutter.embedding.android.FlutterActivity
 

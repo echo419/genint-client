@@ -1,6 +1,6 @@
 {
-    "name": "genesys_interview",
-    "short_name": "genesys_interview",
+    "name": "GenInt Aftermath",
+    "short_name": "genint",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

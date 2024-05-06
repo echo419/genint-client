@@ -1,4 +1,4 @@
-import 'package:genesys_interview/messages/app_content_element_view.dart';
+import 'package:genint/messages/app_content_element_view.dart';
 
 class LoginResponse {
   final bool success;

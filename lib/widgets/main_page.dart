@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:genesys_interview/globals/colors.dart';
-import 'package:genesys_interview/globals/decorations.dart';
-import 'package:genesys_interview/globals/styles.dart';
-import 'package:genesys_interview/messages/app_content_element_view.dart';
-import 'package:genesys_interview/messages/shared_model.dart';
-import 'package:genesys_interview/widgets/app_content_element_widget.dart';
-import 'package:genesys_interview/widgets/login_page.dart';
+import 'package:genint/globals/colors.dart';
+import 'package:genint/globals/decorations.dart';
+import 'package:genint/globals/styles.dart';
+import 'package:genint/messages/app_content_element_view.dart';
+import 'package:genint/messages/shared_model.dart';
+import 'package:genint/widgets/app_content_element_widget.dart';
+import 'package:genint/widgets/login_page.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {

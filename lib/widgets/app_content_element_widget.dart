@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:genesys_interview/globals/decorations.dart';
-import 'package:genesys_interview/globals/misc.dart';
-import 'package:genesys_interview/globals/styles.dart';
-import 'package:genesys_interview/messages/app_content_element_view.dart';
-import 'package:genesys_interview/widgets/main_page.dart';
+import 'package:genint/globals/decorations.dart';
+import 'package:genint/globals/misc.dart';
+import 'package:genint/globals/styles.dart';
+import 'package:genint/messages/app_content_element_view.dart';
+import 'package:genint/widgets/main_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppContentElementWidget extends StatefulWidget {

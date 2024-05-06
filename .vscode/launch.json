@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "genesys_interview",
+      "name": "genint",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "genesys_interview (profile mode)",
+      "name": "genint (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "genesys_interview (release mode)",
+      "name": "genint (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
