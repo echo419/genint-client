@@ -29,35 +29,44 @@ class _AppContentElementWidgetState extends State<AppContentElementWidget> {
     List<InlineSpan> mainSpanArray = [];
     String currentPlainText = "";
 
-    for (var element in widget.appContentElementView.text!.split(" ")) {
-      if (isImageLink(element)) {
-        mainSpanArray.add(TextSpan(
-            text: currentPlainText,
-            style: GStyles.appContentWidgetElementStyle));
-        currentPlainText = " ";
-        mainSpanArray.add(WidgetSpan(
-            child: GestureDetector(
-          onTap: () {
-            launchUrl(Uri.parse(element));
-          },
-          child: MouseRegion(
-            cursor: MaterialStateMouseCursor.clickable,
-            child: Container(
-              padding: const EdgeInsets.all(2),
-              margin: const EdgeInsets.all(8),
-              decoration: GDecorations.contentImageDecoration,
-              child: Image.network(element),
+    for (var line in widget.appContentElementView.text!.split("\r\n")) {
+      for (var word in line.split(" ")) {
+        if (isImageLink(word)) {
+          mainSpanArray.add(TextSpan(
+              text: currentPlainText,
+              style: GStyles.appContentWidgetElementStyle));
+          currentPlainText = " ";
+          mainSpanArray.add(WidgetSpan(
+              child: GestureDetector(
+            onTap: () {
+              launchUrl(Uri.parse(word));
+            },
+            child: MouseRegion(
+              cursor: MaterialStateMouseCursor.clickable,
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  margin: const EdgeInsets.all(8),
+                  decoration: GDecorations.contentImageDecoration,
+                  child: Image.network(word),
+                ),
+              ),
             ),
-          ),
-        )));
-      } else {
-        currentPlainText += "$element ";
+          )));
+        } else {
+          currentPlainText += "$word ";
+        }
       }
+      currentPlainText += "\r\n";
     }
 
     if (currentPlainText.trim().isNotEmpty) {
-      mainSpanArray.add(TextSpan(
-          text: currentPlainText, style: GStyles.appContentWidgetElementStyle));
+      mainSpanArray.add(WidgetSpan(
+          child: Text(
+            currentPlainText,
+            style: GStyles.appContentWidgetElementStyle,
+          ),
+          style: GStyles.appContentWidgetElementStyle));
     }
 
     return RichText(
@@ -67,7 +76,7 @@ class _AppContentElementWidgetState extends State<AppContentElementWidget> {
   }
 
   bool isImageLink(String element) {
-    if (!element.startsWith("http") && !element.startsWith("https")) {
+    if (!element.startsWith("http://") && !element.startsWith("https://")) {
       return false;
     }
 
@@ -81,13 +90,12 @@ class _AppContentElementWidgetState extends State<AppContentElementWidget> {
 
   Widget get baseWidget {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: Container(
         decoration:
             _mouseEntered ? GDecorations.mouseEnteredBoxDecoration : null,
-        //color: _mouseEntered ? GColors.defaultAmberLight : null,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -97,9 +105,14 @@ class _AppContentElementWidgetState extends State<AppContentElementWidget> {
             ),
             Expanded(
                 child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: contentRichText,
-            ))
+              padding: const EdgeInsets.all(0.0),
+              child: widget.appContentElementView.icon == null
+                  ? contentRichText
+                  : Text(
+                      widget.appContentElementView.text ?? "",
+                      style: GStyles.appContentWidgetElementStyle,
+                    ),
+            )),
           ],
         ),
       ),

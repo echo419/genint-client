@@ -16,6 +16,51 @@ class AppContentElementView {
       case "person":
         return Icons.person;
 
+      case "code":
+        return Icons.code;
+
+      case "network":
+        return Icons.wifi;
+
+      case "network2":
+        return Icons.network_check;
+
+      case "question_mark":
+        return Icons.question_mark;
+
+      case "design":
+        return Icons.design_services;
+
+      case "document":
+        return Icons.edit_document;
+
+      case "dollar":
+        return Icons.request_page;
+
+      case "feedback":
+        return Icons.announcement;
+
+      case "note":
+        return Icons.note;
+
+      case "privacy":
+        return Icons.privacy_tip;
+
+      case "building":
+        return Icons.construction;
+
+      case "cloud":
+        return Icons.cloud_rounded;
+
+      case "location":
+        return Icons.location_on;
+
+      case "arrow":
+        return Icons.keyboard_double_arrow_right;
+
+      case "maintenance":
+        return Icons.build;
+
       default:
         return null;
     }
